@@ -1,5 +1,6 @@
                 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
       [SerializeField] private AudioClip pegaCubo;
      [SerializeField] private int pontos;
      [SerializeField] private bool estaVivo;
+     [SerializeField] private bool TocandoChao;
      private AudioSource audioPlayer;
 
     // Start is called before the first frame update
@@ -25,8 +27,9 @@ public class PlayerMovement : MonoBehaviour
         estaVivo = true;
         rb = GetComponent<Rigidbody>();
         audioPlayer = GetComponent<AudioSource>();
-        velocidade = 7f;
+        velocidade = 3.5f;
         forcaPulo = 7f;
+        
     }
 
     // Update is called once per frame
@@ -39,13 +42,17 @@ public class PlayerMovement : MonoBehaviour
         
         moveH = Input.GetAxis("Horizontal");
         moveV = Input.GetAxis("Vertical");
-        transform.position += new Vector3(moveH * Time.deltaTime, 0, moveV * Time.deltaTime );
+        transform.position += new Vector3(moveH * Time.deltaTime * velocidade, 0, moveV * Time.deltaTime * velocidade );
 
         //Pulo
+       
+       
         if(Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(transform.up * forcaPulo, ForceMode.Impulse);
             audioPlayer.PlayOneShot(pulo);
+            
+        
         }
     }
     }
@@ -61,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         if(lava.gameObject.CompareTag("Lava"))
         {
              estaVivo = false;
-             Destroy(this.gameObject);
+            
         }
        
     }
