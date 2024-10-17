@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,9 +17,10 @@ public class PlayerMovement : MonoBehaviour
      [Header("Sons da Bolinha")]
      [SerializeField] private AudioClip pulo;
       [SerializeField] private AudioClip pegaCubo;
-     [SerializeField] private int pontos;
+     [SerializeField] public static int pontos;
      [SerializeField] private bool estaVivo;
      [SerializeField] private bool TocandoChao;
+      [SerializeField] public static Vector3 posicaoInicial;
      private AudioSource audioPlayer;
 
     // Start is called before the first frame update
@@ -29,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         audioPlayer = GetComponent<AudioSource>();
         velocidade = 3.5f;
         forcaPulo = 7f;
-        
+        posicaoInicial = transform.position;
     }
 
     // Update is called once per frame
@@ -54,6 +56,9 @@ public class PlayerMovement : MonoBehaviour
             
         
         }
+
+        
+
     }
     }
      private void OnTriggerEnter(Collider moeda)
@@ -70,7 +75,10 @@ public class PlayerMovement : MonoBehaviour
              estaVivo = false;
             
         }
-       
-    }
-}
+    }  
+    public void VoltarParaPosicaoInicial()
+    {
+        transform.position = PlayerMovement.posicaoInicial;  // Reseta a posição do player para a posição inicial
+    }     
+}   
 
