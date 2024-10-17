@@ -16,7 +16,7 @@ public class CuboBrilhante : MonoBehaviour
         rX = 25f;
         rY = 25f;
         rZ = 25f;
-        velocidade = 5f;
+        velocidade = 2.3f;
     }
 
     // Update is called once per frame

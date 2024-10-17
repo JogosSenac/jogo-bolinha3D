@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
         estaVivo = true;
         rb = GetComponent<Rigidbody>();
         audioPlayer = GetComponent<AudioSource>();
+        velocidade = 7f;
+        forcaPulo = 7f;
     }
 
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(estaVivo == true)
         {
+            
 
         
         moveH = Input.GetAxis("Horizontal");
@@ -46,18 +49,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     }
-     private void OnTriggerEnter(Collider other)
+     private void OnTriggerEnter(Collider moeda)
     {
-        Destroy(other.gameObject);
+        Destroy(moeda.gameObject);
          audioPlayer.PlayOneShot(pegaCubo);
         pontos++;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision lava)
     {
-        if(other.gameObject.CompareTag("Agua"))
+        if(lava.gameObject.CompareTag("Lava"))
         {
              estaVivo = false;
+             Destroy(this.gameObject);
         }
        
     }
