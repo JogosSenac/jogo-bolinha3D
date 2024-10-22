@@ -1,11 +1,11 @@
-                using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private float moveH;
     private float moveV;
@@ -13,15 +13,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private float velocidade;
     [SerializeField]private float forcaPulo;
     [SerializeField]private bool invertH;
-     [SerializeField]private bool invertV;
-     [Header("Sons da Bolinha")]
-     [SerializeField] private AudioClip pulo;
-      [SerializeField] private AudioClip pegaCubo;
-     [SerializeField] public static int pontos;
-     [SerializeField] private bool estaVivo;
-     [SerializeField] private bool TocandoChao;
-      [SerializeField] public static Vector3 posicaoInicial;
-     private AudioSource audioPlayer;
+    [SerializeField]private bool invertV;
+    [SerializeField]public int pontos;
+    [SerializeField]public bool estaVivo;
+    [SerializeField]private bool TocandoChao;
+    [SerializeField]public Vector3 posicaoInicial;
+    [Header("Sons da Bolinha")]
+    [SerializeField]private AudioClip pulo;
+    [SerializeField]private AudioClip pegaCubo;
+    [SerializeField]private AudioSource audioPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         velocidade = 3.5f;
         forcaPulo = 7f;
         posicaoInicial = transform.position;
+        
     }
 
     // Update is called once per frame
@@ -68,17 +69,26 @@ public class PlayerMovement : MonoBehaviour
         pontos++;
     }
 
-    private void OnCollisionEnter(Collision lava)
+    private void OnCollisionEnter(Collision other)
     {
-        if(lava.gameObject.CompareTag("Lava"))
+        if(other.gameObject.CompareTag("Lava"))
         {
              estaVivo = false;
-            
+             
+            Time.timeScale = 0;
+        }
+        if(other.gameObject.CompareTag("Portal") && pontos < 12)
+        {
+            VoltarParaPosicaoInicial();
         }
     }  
     public void VoltarParaPosicaoInicial()
     {
-        transform.position = PlayerMovement.posicaoInicial;  // Reseta a posição do player para a posição inicial
+        transform.position = posicaoInicial;  // Reseta a posição do player para a posição inicial
     }     
+    public int PegaPontos()
+    {
+        return pontos;
+    }
 }   
 

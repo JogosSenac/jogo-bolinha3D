@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
+using TMPro;
 
 public class Textos : MonoBehaviour
 {
-    public Text textoPontos;  
-    public Text textoDeveres;
-
+    public TextMeshProUGUI textoPontos;  
+    public TextMeshProUGUI textoDeveres;
+      private Player player;
+    
     void Start()
     {
         AtualizarTexto();  // Atualiza o texto quando o jogo começa
+         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     void Update()
@@ -18,22 +23,26 @@ public class Textos : MonoBehaviour
         AtualizarTexto(); 
     }
 
-    // Método para atualizar o texto com o valor da variável pontos
+    
     void AtualizarTexto()
     {
         // Concatenando a variável com a string
-        textoPontos.text = PlayerMovement.pontos.ToString() + "/12";
-        if (PlayerMovement.pontos == 0)
+        textoPontos.text = player.PegaPontos().ToString() + "/12";
+        if (player.PegaPontos() == 0)
         {
-            textoDeveres.text = ("Colete todos os cubos");
+            textoDeveres.text = ("Colete todos os cubos, mas não encoste na LAVA");
         }
-        if (PlayerMovement.pontos == 6)
+        if (player.PegaPontos() == 6)
         {
             textoDeveres.text = ("Quase lá");
         }
-        if (PlayerMovement.pontos == 12)
+        if (player.PegaPontos() == 12)
         {
             textoDeveres.text = ("Vá para o portal");
+        }
+        if (player.estaVivo == false)
+        {
+            textoDeveres.text = ("Você Morreu!");
         }
 
 

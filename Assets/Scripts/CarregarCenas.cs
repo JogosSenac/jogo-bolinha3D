@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class CarregarCenas : MonoBehaviour
 {
+    private MudaMaterial mudaMaterial; 
     
+
+    void Start()
+    {
+         mudaMaterial = GameObject.FindWithTag("Player").GetComponent<MudaMaterial>();
+    }
     public void Play()
     {
        SceneManager.LoadScene("fase1"); 
@@ -15,5 +21,13 @@ public class CarregarCenas : MonoBehaviour
     public void Agradecimentos()
     {
         SceneManager.LoadScene("Agradecimentos");
+    }
+
+    public void Fase2()
+    {
+        if (mudaMaterial.mudaFase == true )
+        {
+            SceneManager.LoadScene("fase2"); 
+        }
     }
 }
