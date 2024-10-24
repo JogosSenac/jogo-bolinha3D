@@ -5,29 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class CarregarCenas : MonoBehaviour
 {
-    private MudaMaterial mudaMaterial; 
     
-
-    void Start()
+    public void Start()
     {
-         mudaMaterial = GameObject.FindWithTag("Player").GetComponent<MudaMaterial>();
+    
     }
-    public void Play()
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
+        Time.timeScale = 1;
+    }
+    public void Fase1()
     {
        SceneManager.LoadScene("fase1"); 
+       Time.timeScale = 1;
     }
-
-    
+    public void Fase2()
+    {
+        SceneManager.LoadScene("fase2");
+        Time.timeScale = 1;
+    }
     public void Agradecimentos()
     {
         SceneManager.LoadScene("Agradecimentos");
+        Time.timeScale = 1;
     }
 
-    public void Fase2()
-    {
-        if (mudaMaterial.mudaFase == true )
-        {
-            SceneManager.LoadScene("fase2"); 
-        }
-    }
 }

@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/fase1.unity
+    guid: 212b067cc086a4b40b23f93cb57afe24
   - enabled: 1
-    path: Assets/Scenes/Fase1.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/fase2.unity
+    guid: a9d5f4e1c6c7f8d45a4a9e5ad26a2943
+  - enabled: 1
+    path: Assets/Scenes/fase1.unity
+    guid: 212b067cc086a4b40b23f93cb57afe24
+  - enabled: 1
+    path: Assets/Scenes/Agradecimentos.unity
+    guid: 386bac0eeddbefa4c80e5ea6310496d0
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: a102b34c6fc3662448b53dd1d5dce5cc
   m_configObjects: {}

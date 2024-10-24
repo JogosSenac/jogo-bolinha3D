@@ -10,12 +10,13 @@ public class Textos : MonoBehaviour
 {
     public TextMeshProUGUI textoPontos;  
     public TextMeshProUGUI textoDeveres;
-      private Player player;
+    private Player player;
+    
     
     void Start()
     {
+        player = GameObject.FindObjectOfType<Player>();
         AtualizarTexto();  // Atualiza o texto quando o jogo começa
-         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     void Update()
@@ -27,7 +28,7 @@ public class Textos : MonoBehaviour
     void AtualizarTexto()
     {
         // Concatenando a variável com a string
-        textoPontos.text = player.PegaPontos().ToString() + "/12";
+        textoPontos.text = player.PegaPontos().ToString() + "/12" ;
         if (player.PegaPontos() == 0)
         {
             textoDeveres.text = ("Colete todos os cubos, mas não encoste na LAVA");
@@ -40,10 +41,9 @@ public class Textos : MonoBehaviour
         {
             textoDeveres.text = ("Vá para o portal");
         }
-        if (player.estaVivo == false)
-        {
-            textoDeveres.text = ("Você Morreu!");
-        }
+        
+
+
 
 
         
